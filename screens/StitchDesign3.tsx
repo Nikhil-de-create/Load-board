@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Depth1Frame011 from "../components/Depth1Frame011";
-import Component2 from "../assets/";
+
 import { FontSize, FontFamily, Color, Border, Padding } from "../GlobalStyles";
 
 const StitchDesign3 = () => {
@@ -36,7 +36,7 @@ const StitchDesign3 = () => {
                   </View>
                 </Pressable>
               </View>
-              <Component2 style={[styles.depth2Frame1, styles.frameFlexBox1]} />
+              <View style={[styles.depth2Frame1, styles.frameFlexBox1]} />
             </View>
           </View>
         </ScrollView>

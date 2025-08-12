@@ -1,5 +1,7 @@
 import * as React from "react";
 import { ScrollView, StyleSheet, Text, View, Pressable } from "react-native";
+import { useNavigation, ParamListBase } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import Depth3frame0 from "../assets/depth-3-frame-0.svg";
 import Depth3frame01 from "../assets/depth-3-frame-01.svg";
 import {
@@ -12,6 +14,8 @@ import {
 } from "../GlobalStyles";
 
 const SelectLanguage = () => {
+  const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
+  
   return (
     <ScrollView
       style={styles.selectLanguage}
@@ -120,7 +124,10 @@ const SelectLanguage = () => {
         </View>
         <View style={styles.depth1Frame0}>
           <View style={[styles.depth2Frame01, styles.depth2FrameSpaceBlock]}>
-            <Pressable style={[styles.depth3Frame010, styles.frameFlexBox]}>
+            <Pressable 
+              style={[styles.depth3Frame010, styles.frameFlexBox]}
+              onPress={() => navigation.navigate('Welcome')}
+            >
               <View style={styles.depth4Frame0}>
                 <Text style={[styles.continue, styles.textLayout]}>
                   Continue

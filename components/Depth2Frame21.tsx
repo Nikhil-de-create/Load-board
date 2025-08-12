@@ -22,6 +22,7 @@ export type Depth2Frame21Type = {
   dropDelhi?: string;
   tons?: string;
   depth4Frame1?: ImageSourcePropType;
+  onPress?: () => void;
 };
 
 const Depth2Frame21 = ({
@@ -29,9 +30,10 @@ const Depth2Frame21 = ({
   dropDelhi,
   tons,
   depth4Frame1,
+  onPress,
 }: Depth2Frame21Type) => {
   return (
-    <View style={styles.depth2Frame2}>
+    <Pressable style={styles.depth2Frame2} onPress={onPress}>
       <View style={[styles.depth3Frame0, styles.frameFlexBox1]}>
         <View style={styles.depth4Frame0}>
           <View style={styles.depth5Frame0}>
@@ -66,7 +68,7 @@ const Depth2Frame21 = ({
           source={depth4Frame1}
         />
       </View>
-    </View>
+    </Pressable>
   );
 };
 

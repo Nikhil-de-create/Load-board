@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useRoute, RouteProp, useNavigation } from "@react-navigation/native";
 import Depth1Frame011111 from "../components/Depth1Frame011111";
 import {
   Padding,
@@ -19,7 +20,25 @@ import {
   Gap,
 } from "../GlobalStyles";
 
+type BidRouteProp = RouteProp<{
+  PlaceBid: { loadData: any };
+}, 'PlaceBid'>;
+
 const Bid = () => {
+  const route = useRoute<BidRouteProp>();
+  const navigation = useNavigation();
+  const { loadData } = route.params || {};
+  
+  const handlePlaceBid = () => {
+    // Handle bid placement logic here
+    console.log('Placing bid for load:', loadData);
+    (navigation as any).navigate('TripDetails', { loadData });
+  };
+  
+  const handleCancel = () => {
+    navigation.goBack();
+  };
+  
   return (
     <SafeAreaView style={styles.bidFlexBox}>
       <KeyboardAvoidingView
@@ -33,10 +52,20 @@ const Bid = () => {
           <View style={[styles.depth0Frame0, styles.placeBidFlexBox]}>
             <Depth1Frame011111 />
             <View style={styles.depth1Frame1}>
+              {loadData && (
+                <View style={styles.loadInfo}>
+                  <Text style={styles.loadInfoTitle}>Load Information</Text>
+                  <Text style={styles.loadInfoText}>{loadData.pickupMumbai}</Text>
+                  <Text style={styles.loadInfoText}>{loadData.dropDelhi}</Text>
+                  <Text style={styles.loadInfoText}>{loadData.tons}</Text>
+                  <Text style={styles.loadInfoText}>{loadData.materialType}</Text>
+                </View>
+              )}
               <View style={styles.depth2Frame0}>
                 <View style={styles.depth3Frame0}>
                   <Pressable
                     style={[styles.depth4Frame0, styles.depth4FrameLayout]}
+                    onPress={handlePlaceBid}
                   >
                     <View style={styles.depth5Frame0}>
                       <Text style={[styles.placeBid, styles.placeBidFlexBox]}>
@@ -46,6 +75,7 @@ const Bid = () => {
                   </Pressable>
                   <Pressable
                     style={[styles.depth4Frame1, styles.depth4FrameLayout]}
+                    onPress={handleCancel}
                   >
                     <View style={styles.depth5Frame0}>
                       <Text style={[styles.placeBid, styles.placeBidFlexBox]}>
@@ -129,6 +159,24 @@ const styles = StyleSheet.create({
   },
   depth1Frame1: {
     alignSelf: "stretch",
+  },
+  loadInfo: {
+    paddingHorizontal: Padding.p_16,
+    paddingVertical: Padding.p_12,
+    backgroundColor: Color.colorGray300,
+    marginBottom: Padding.p_16,
+  },
+  loadInfoTitle: {
+    fontSize: FontSize.size_18,
+    fontFamily: FontFamily.spaceGroteskBold,
+    color: Color.colorWhite,
+    marginBottom: Padding.p_8,
+  },
+  loadInfoText: {
+    fontSize: FontSize.size_14,
+    fontFamily: FontFamily.spaceGroteskRegular,
+    color: Color.colorWhite,
+    marginBottom: Padding.p_4,
   },
   depth0Frame0: {
     justifyContent: "space-between",

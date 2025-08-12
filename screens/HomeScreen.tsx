@@ -18,22 +18,40 @@ const HomeScreen = () => {
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
   const [depth2Frame21Items] = useState([
     {
+      id: '1',
       pickupMumbai: "Pickup: Mumbai",
       dropDelhi: "Drop: Delhi",
       tons: "10 tons",
       depth4Frame1: require("../assets/depth-4-frame-1.png"),
+      materialType: "Steel",
+      price: "₹15,000",
+      distance: "1,200 km",
+      pickupDate: "2024-01-15",
+      dropDate: "2024-01-18",
     },
     {
+      id: '2',
       pickupMumbai: "Pickup: Bangalore",
       dropDelhi: "Drop: Chennai",
       tons: "15 tons",
       depth4Frame1: require("../assets/depth-4-frame-11.png"),
+      materialType: "Electronics",
+      price: "₹22,000",
+      distance: "350 km",
+      pickupDate: "2024-01-16",
+      dropDate: "2024-01-17",
     },
     {
+      id: '3',
       pickupMumbai: "Pickup: Kolkata",
       dropDelhi: "Drop: Hyderabad",
       tons: "12 tons",
       depth4Frame1: require("../assets/depth-4-frame-13.png"),
+      materialType: "Textiles",
+      price: "₹18,000",
+      distance: "1,500 km",
+      pickupDate: "2024-01-17",
+      dropDate: "2024-01-20",
     },
   ]);
 
@@ -42,10 +60,7 @@ const HomeScreen = () => {
       style={[styles.homeScreen, styles.homeScreenLayout]}
       contentContainerStyle={styles.homeScreenScrollViewContent}
     >
-      <Pressable
-        style={[styles.depth0Frame0, styles.frameFlexBox]}
-        onPress={() => navigation.navigate("MyTrips")}
-      >
+      <View style={[styles.depth0Frame0, styles.frameFlexBox]}>
         <View style={styles.depth1Frame0}>
           <View style={[styles.depth2Frame0, styles.depth2FrameFlexBox]}>
             <View style={styles.depth3Frame0}>
@@ -67,11 +82,19 @@ const HomeScreen = () => {
               dropDelhi={item.dropDelhi}
               tons={item.tons}
               depth4Frame1={item.depth4Frame1}
+              onPress={() => (navigation as any).navigate('LoadDetails', { loadData: item })}
             />
           ))}
+          
+          <Pressable
+            style={styles.myTripsButton}
+            onPress={() => navigation.navigate("MyTrips")}
+          >
+            <Text style={styles.myTripsButtonText}>View My Trips</Text>
+          </Pressable>
         </View>
         <Depth1Frame1 />
-      </Pressable>
+      </View>
     </ScrollView>
   );
 };
@@ -142,6 +165,20 @@ const styles = StyleSheet.create({
   homeScreen: {
     width: "100%",
     backgroundColor: Color.colorWhite,
+  },
+  myTripsButton: {
+    backgroundColor: Color.colorRoyalblue100,
+    paddingVertical: Padding.p_4,
+    paddingHorizontal: Padding.p_16,
+    borderRadius: Border.br_8,
+    alignItems: 'center',
+    marginHorizontal: Padding.p_16,
+    marginTop: Padding.p_16,
+  },
+  myTripsButtonText: {
+    color: Color.colorWhite,
+    fontSize: FontSize.size_16,
+    fontFamily: FontFamily.spaceGroteskMedium,
   },
 });
 

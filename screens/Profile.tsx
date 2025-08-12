@@ -8,8 +8,10 @@ import {
   TextInput,
   Platform,
   KeyboardAvoidingView,
+  Pressable,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useAuth } from "../src/state/auth";
 import Depth3frame0 from "../assets/depth-3-frame-0.svg";
 import Depth3frame0121 from "../assets/depth-3-frame-0121.svg";
 import Depth3frame12 from "../assets/depth-3-frame-12.svg";
@@ -28,6 +30,8 @@ import {
 } from "../GlobalStyles";
 
 const Profile = () => {
+  const { signOut } = useAuth();
+  
   return (
     <SafeAreaView style={[styles.profile, styles.profileLayout]}>
       <KeyboardAvoidingView
@@ -244,6 +248,18 @@ const Profile = () => {
                   width={28}
                   height={28}
                 />
+              </View>
+              <View
+                style={[styles.depth2Frame8, styles.depth2FrameSpaceBlock1]}
+              >
+                <Pressable
+                  style={styles.depth3Frame06}
+                  onPress={signOut}
+                >
+                  <Text style={[styles.notifications, styles.blankTypo]}>
+                    Logout
+                  </Text>
+                </Pressable>
               </View>
               <View
                 style={[styles.depth2Frame8, styles.depth2FrameSpaceBlock1]}

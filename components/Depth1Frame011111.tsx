@@ -1,7 +1,7 @@
 import * as React from "react";
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import Depth3frame0 from "../assets/depth-3-frame-0.svg";
-import Component from "../assets/";
+
 import { Padding, FontSize, FontFamily, Color } from "../GlobalStyles";
 
 const Depth1Frame011111 = () => {
@@ -16,7 +16,7 @@ const Depth1Frame011111 = () => {
       <View style={[styles.depth2Frame1, styles.depth2FrameSpaceBlock]}>
         <TextInput style={styles.depth3Frame01} />
       </View>
-      <Component style={styles.depth2Frame2} />
+      <View style={styles.depth2Frame2} />
     </View>
   );
 };

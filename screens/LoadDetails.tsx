@@ -7,6 +7,7 @@ import {
   Image,
   Pressable,
 } from "react-native";
+import { useRoute, RouteProp, useNavigation } from "@react-navigation/native";
 import Depth3frame0 from "../assets/depth-3-frame-0.svg";
 import Depth3frame04 from "../assets/depth-3-frame-04.svg";
 import Depth3frame06 from "../assets/depth-3-frame-06.svg";
@@ -21,7 +22,29 @@ import {
   Gap,
 } from "../GlobalStyles";
 
+type LoadDetailsRouteProp = RouteProp<{
+  LoadDetails: { loadData: any };
+}, 'LoadDetails'>;
+
 const LoadDetails = () => {
+  const route = useRoute<LoadDetailsRouteProp>();
+  const navigation = useNavigation();
+  const { loadData } = route.params || {};
+  
+  // Default values if no load data is passed
+  const defaultLoadData = {
+    pickupMumbai: "Pickup: Mumbai",
+    dropDelhi: "Drop: Delhi",
+    tons: "15 tons",
+    materialType: "Steel",
+    price: "₹15,000",
+    distance: "1,200 km",
+    pickupDate: "2024-01-15",
+    dropDate: "2024-01-18",
+  };
+  
+  const load = loadData || defaultLoadData;
+  
   return (
     <ScrollView
       style={[styles.loadDetails, styles.loadDetailsLayout]}
@@ -30,11 +53,16 @@ const LoadDetails = () => {
       <View style={[styles.depth0Frame0, styles.frameBg]}>
         <View style={styles.depth1Frame0}>
           <View style={[styles.depth2Frame0, styles.depth2FrameSpaceBlock]}>
-            <Depth3frame0
-              style={styles.depth3FrameLayout}
-              width={48}
-              height={48}
-            />
+            <Pressable 
+              style={styles.backButton}
+              onPress={() => navigation.goBack()}
+            >
+              <Depth3frame0
+                style={styles.depth3FrameLayout}
+                width={48}
+                height={48}
+              />
+            </Pressable>
             <View style={styles.depth3Frame1}>
               <Text style={[styles.loadDetails1, styles.loadDetails1Typo]}>
                 Load Details
@@ -45,13 +73,17 @@ const LoadDetails = () => {
             <Image
               style={[styles.depth3Frame01, styles.loadDetailsLayout]}
               resizeMode="cover"
-              source={require("../assets/depth-3-frame-07.png")}
+              source={load.depth4Frame1 || require("../assets/depth-3-frame-07.png")}
             />
           </View>
           <View style={[styles.depth2Frame2, styles.depth2FrameSpaceBlock]}>
             <Text style={[styles.loadInformation, styles.loadClr]}>
               Load Information
             </Text>
+            <View style={styles.locationInfo}>
+              <Text style={styles.locationText}>{load.pickupMumbai}</Text>
+              <Text style={styles.locationText}>{load.dropDelhi}</Text>
+            </View>
           </View>
           <View style={styles.depth2Frame3}>
             <Depth3frame04
@@ -66,7 +98,7 @@ const LoadDetails = () => {
                 </Text>
               </View>
               <View style={styles.depth4Frame1}>
-                <Text style={styles.steel}>Steel</Text>
+                <Text style={styles.steel}>{load.materialType}</Text>
               </View>
             </View>
           </View>
@@ -83,7 +115,7 @@ const LoadDetails = () => {
                 </Text>
               </View>
               <View style={styles.depth4Frame11}>
-                <Text style={styles.steel}>15 tons</Text>
+                <Text style={styles.steel}>{load.tons}</Text>
               </View>
             </View>
           </View>
@@ -100,7 +132,7 @@ const LoadDetails = () => {
                 </Text>
               </View>
               <View style={styles.depth4Frame0}>
-                <Text style={styles.steel}>₹ 25,000</Text>
+                <Text style={styles.steel}>{load.price}</Text>
               </View>
             </View>
           </View>
@@ -113,11 +145,28 @@ const LoadDetails = () => {
             <View style={styles.depth3Frame11}>
               <View style={styles.depth4Frame03}>
                 <Text style={[styles.materialType, styles.materialTypeLayout]}>
-                  Pickup Time
+                  Pickup Date
                 </Text>
               </View>
               <View style={styles.depth4Frame0}>
-                <Text style={styles.steel}>Tomorrow, 9 AM</Text>
+                <Text style={styles.steel}>{load.pickupDate}</Text>
+              </View>
+            </View>
+          </View>
+          <View style={styles.depth2Frame3}>
+            <Depth3frame05
+              style={[styles.depth3Frame02, styles.depth3FrameLayout]}
+              width={48}
+              height={48}
+            />
+            <View style={styles.depth3Frame11}>
+              <View style={styles.depth4Frame03}>
+                <Text style={[styles.materialType, styles.materialTypeLayout]}>
+                  Distance
+                </Text>
+              </View>
+              <View style={styles.depth4Frame0}>
+                <Text style={styles.steel}>{load.distance}</Text>
               </View>
             </View>
           </View>
@@ -127,6 +176,7 @@ const LoadDetails = () => {
             <View style={[styles.depth3Frame06, styles.frameSpaceBlock]}>
               <Pressable
                 style={[styles.depth4Frame04, styles.depth4FrameLayout]}
+                onPress={() => (navigation as any).navigate('Chat', { loadData: load })}
               >
                 <View style={styles.depth5Frame0}>
                   <Text
@@ -137,7 +187,10 @@ const LoadDetails = () => {
                 </View>
               </Pressable>
               <View style={[styles.depth4Frame14, styles.depth4FrameLayout]}>
-                <Pressable style={styles.depth5Frame0}>
+                <Pressable 
+                  style={styles.depth5Frame0}
+                  onPress={() => (navigation as any).navigate('PlaceBid', { loadData: load })}
+                >
                   <Text
                     style={[styles.contactShipper, styles.materialTypeLayout]}
                   >
@@ -340,6 +393,20 @@ const styles = StyleSheet.create({
     height: 20,
     backgroundColor: Color.colorGray300,
     alignSelf: "stretch",
+  },
+  locationInfo: {
+    marginTop: Padding.p_8,
+    gap: Gap.gap_4,
+  },
+  locationText: {
+    fontSize: FontSize.size_14,
+    lineHeight: 20,
+    fontFamily: FontFamily.spaceGroteskRegular,
+    color: Color.colorWhite,
+    textAlign: "left",
+  },
+  backButton: {
+    padding: Padding.p_4,
   },
   depth0Frame0: {
     minHeight: 844,

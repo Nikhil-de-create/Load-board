@@ -1,7 +1,7 @@
 import * as React from "react";
 import { TextInput, StyleSheet, View } from "react-native";
 import Depth5frame1 from "../assets/depth-5-frame-1.svg";
-import Component1 from "../assets/";
+
 import { Border, Color, Padding, FontFamily, FontSize } from "../GlobalStyles";
 
 const Depth1Frame111 = () => {
@@ -19,7 +19,7 @@ const Depth1Frame111 = () => {
           </View>
         </View>
       </View>
-      <Component1 style={[styles.depth2Frame1, styles.frameLayout]} />
+      <View style={[styles.depth2Frame1, styles.frameLayout]} />
     </View>
   );
 };

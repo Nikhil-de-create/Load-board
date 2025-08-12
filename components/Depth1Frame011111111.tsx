@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
   thankYouFor: {
     width: "100%",
     fontSize: FontSize.size_28,
-    textAlign: "CENTER",
+    textAlign: "center",
     alignSelf: "stretch",
   },
   depth2Frame1: {

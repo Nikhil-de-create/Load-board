@@ -9,10 +9,14 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation, ParamListBase } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import Depth1Frame01 from "../components/Depth1Frame01";
 import { FontSize, FontFamily, Color, Border, Padding } from "../GlobalStyles";
 
 const TruckDetails = () => {
+  const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
+  
   return (
     <SafeAreaView style={[styles.truckDetails, styles.scrollviewLayout]}>
       <KeyboardAvoidingView
@@ -27,7 +31,10 @@ const TruckDetails = () => {
             <Depth1Frame01 />
             <View style={styles.depth1Frame1}>
               <View style={styles.depth2Frame0}>
-                <Pressable style={[styles.depth3Frame0, styles.frameFlexBox]}>
+                <Pressable 
+                  style={[styles.depth3Frame0, styles.frameFlexBox]}
+                  onPress={() => navigation.navigate('Login')}
+                >
                   <View style={styles.frameFlexBox}>
                     <Text style={[styles.save, styles.saveFlexBox]}>Save</Text>
                   </View>

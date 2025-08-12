@@ -1,5 +1,7 @@
 import * as React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View, Pressable } from "react-native";
+import { useNavigation, ParamListBase } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import Depth3frame0 from "../assets/depth-3-frame-0.svg";
 import Depth2Frame111 from "../components/Depth2Frame111";
 import Depth2Frame4 from "../components/Depth2Frame4";
@@ -13,6 +15,8 @@ import {
 } from "../GlobalStyles";
 
 const KYC = () => {
+  const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
+  
   return (
     <ScrollView
       style={styles.kyc}
@@ -65,11 +69,14 @@ const KYC = () => {
         </View>
         <View style={styles.depth1Frame0}>
           <View style={[styles.depth2Frame01, styles.depth2FrameSpaceBlock1]}>
-            <View style={styles.depth3Frame02}>
+            <Pressable 
+              style={styles.depth3Frame02}
+              onPress={() => navigation.navigate('TruckDetails')}
+            >
               <View style={styles.depth4Frame02}>
                 <Text style={[styles.next, styles.nextLayout]}>Next</Text>
               </View>
-            </View>
+            </Pressable>
           </View>
           <View style={styles.depth2Frame1} />
         </View>
